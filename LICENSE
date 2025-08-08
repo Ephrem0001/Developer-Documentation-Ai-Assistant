@@ -9,6 +9,7 @@ Quick start
 "@ | Out-File -Encoding utf8 README.md
 
 # LICENSE (MIT)
+
 @"
 MIT License
 
