@@ -1,3 +1,21 @@
-﻿[project]
-name = ""Langchain-Documentation-AIChatBot""
-version = ""0.1.0""
+[project]
+name = "langchain-documentation-aichatbot"
+version = "0.1.0"
+description = "Langchain AiChatebot"
+authors = [
+    {name = "Ephrem0001",email = "ephrem8118@gmail.com"}
+]
+license = {text = "MIT License"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+]
+
+[tool.poetry]
+
+[tool.poetry.group.dev.dependencies]
+yes = "^0.0.1"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
