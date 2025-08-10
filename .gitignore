@@ -5,6 +5,16 @@ __pycache__/
 .env
 .venv/
 .envrc
+/logs/
+/.pytest_cache/
+/.mypy_cache/
+/.ruff_cache/
+.coverage
+coverage.xml
+/dist/
+/build/
+**/.ipynb_checkpoints/
+/data/vector_store/
 /data/raw/
 /models/trained/
 .DS_Store

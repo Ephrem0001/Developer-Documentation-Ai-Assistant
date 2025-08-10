@@ -1,0 +1,6 @@
+# Code owners for this repository
+* @Ephrem0001
+docs/* @Ephrem0001
+src/** @Ephrem0001
+tests/** @Ephrem0001
+

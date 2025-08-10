@@ -50,28 +50,28 @@ cp .env.example .env
 
 ### Web Interface (Streamlit)
 ```bash
-streamlit run src/Langchain-Documentation-AIChatBot/apps/streamlit_app.py
+streamlit run src/langchain_documentation_aichatbot/apps/streamlit_app.py
 ```
 
 ### Web Interface (Gradio)
 ```bash
-python src/Langchain-Documentation-AIChatBot/apps/gradio_app.py
+python -m langchain_documentation_aichatbot.apps.gradio_app
 ```
 
 ### API Server
 ```bash
-uvicorn src.Langchain-Documentation-AIChatBot.api.main:app --reload
+uvicorn src.langchain_documentation_aichatbot.apps.api.main:app --reload
 ```
 
 ### Command Line Interface
 ```bash
-python src/Langchain-Documentation-AIChatBot/cli.py
+python -m langchain_documentation_aichatbot.cli
 ```
 
 ## Project Structure
 
 ```
-src/Langchain-Documentation-AIChatBot/
+src/langchain_documentation_aichatbot/
 ├── __init__.py
 ├── core/
 │   ├── __init__.py
@@ -132,6 +132,41 @@ isort src/
 4. Type checking:
 ```bash
 mypy src/
+```
+
+## Reproducibility
+
+To reproduce the environment and run the project consistently:
+
+1. Create and activate a virtual environment (Windows PowerShell shown):
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+2. Install dependencies in editable mode:
+```powershell
+python -m pip install --upgrade pip
+pip install -e .
+pip install -e ".[dev]"
+```
+
+3. Configure environment variables:
+```powershell
+Copy-Item env.example .env
+# Edit .env and set your API keys, e.g. OPENAI_API_KEY
+```
+
+4. Run apps:
+```powershell
+# Streamlit
+python -m streamlit run src\langchain_documentation_aichatbot\apps\streamlit_app.py
+
+# Gradio
+python -m langchain_documentation_aichatbot.apps.gradio_app
+
+# API
+python -m uvicorn src.langchain_documentation_aichatbot.apps.api.main:app --reload
 ```
 
 ## Contributing
