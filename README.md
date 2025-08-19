@@ -1,6 +1,6 @@
-## RAG for Developer Documentation — LangChain Documentation AI Chatbot
+ # Developer Documentation Ai-Assistant — Grounded RAG to Reduce Hallucination and Improve Developer Productivity
 
-A LangChain-based Retrieval-Augmented Generation (RAG) system that answers developer questions by retrieving and synthesizing information from a curated knowledge base of official documentation and trusted resources. This repository demonstrates a production-oriented architecture for building documentation assistants, with notes on safety, maintenance, scope, and evaluation suitable for Module 1.
+A focused Retrieval-Augmented Generation (RAG) assistant that answers developer questions by retrieving authoritative passages from a curated documentation knowledge base and generating citation-aware responses to reduce hallucination and speed developer workflows.
 
 Key goals:
 - Provide accurate, citation-aware answers sourced from official docs.
