@@ -1,11 +1,11 @@
 cff-version: 1.2.0
 message: If you use this software, please cite it.
-title: LangChain Documentation AI Chatbot
+title: Developer-Documentation-Ai-Assistant
 version: 0.1.0
 date-released: 2025-08-10
 authors:
   - name: Ephrem0001
     email: ephrem8118@gmail.com
-repository-code: https://github.com/Ephrem0001/Langchain-Documentation-AIChatBot
+repository-code: https://github.com/Ephrem0001/Developer-Documentation-Ai-Assistant
 license: MIT
 

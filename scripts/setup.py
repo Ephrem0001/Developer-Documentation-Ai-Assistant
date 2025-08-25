@@ -136,18 +136,18 @@ def setup_knowledge_base():
     try:
         # Import and setup chatbot
         sys.path.insert(0, str(Path("src")))
-        from Langchain-Documentation-AIChatBot.core.chatbot import LangChainChatbot
-        
+        from langchain_documentation_aichatbot.core.chatbot import LangChainChatbot
+
         chatbot = LangChainChatbot()
         success = chatbot.setup_knowledge_base()
-        
+
         if success:
             print("✅ Knowledge base setup completed successfully!")
             return True
         else:
             print("❌ Knowledge base setup failed")
             return False
-            
+
     except Exception as e:
         print(f"❌ Error setting up knowledge base: {e}")
         return False
@@ -155,7 +155,7 @@ def setup_knowledge_base():
 
 def main():
     """Main setup function."""
-    print("🚀 LangChain Documentation AI Chatbot Setup")
+    print("🚀 Developer-Documentation-Ai-Assistant Setup")
     print("=" * 50)
     
     # Check Python version
@@ -192,10 +192,10 @@ def main():
     print("\n📋 Next steps:")
     print("1. Edit .env file with your OpenAI API key")
     print("2. Run the chatbot using one of these methods:")
-    print("   - CLI: python src/Langchain-Documentation-AIChatBot/cli.py chat")
-    print("   - Streamlit: streamlit run src/Langchain-Documentation-AIChatBot/apps/streamlit_app.py")
-    print("   - Gradio: python src/Langchain-Documentation-AIChatBot/apps/gradio_app.py")
-    print("   - API: uvicorn src.Langchain-Documentation-AIChatBot.apps.api.main:app --reload")
+    print("   - CLI: python -m langchain_documentation_aichatbot.cli chat")
+    print("   - Streamlit: streamlit run src/langchain_documentation_aichatbot/apps/streamlit_app.py")
+    print("   - Gradio: python -m langchain_documentation_aichatbot.apps.gradio_app")
+    print("   - API: uvicorn src.langchain_documentation_aichatbot.apps.api.main:app --reload")
     print("\n📖 For more information, see the README.md file")
 
 

@@ -1,4 +1,7 @@
- # Developer Documentation Ai-Assistant — Grounded RAG to Reduce Hallucination and Improve Developer Productivity
+
+ # Developer-Documentation-Ai-Assistant — Grounded RAG to Reduce Hallucination and Improve Developer Productivity
+
+TL;DR: A lightweight Retrieval-Augmented Generation (RAG) assistant that answers developer questions with citation-aware responses drawn from curated documentation to reduce hallucination and speed developer workflows.
 
 A focused Retrieval-Augmented Generation (RAG) assistant that answers developer questions by retrieving authoritative passages from a curated documentation knowledge base and generating citation-aware responses to reduce hallucination and speed developer workflows.
 
@@ -6,11 +9,31 @@ Key goals:
 - Provide accurate, citation-aware answers sourced from official docs.
 - Keep the system simple for Module 1 while highlighting extension points (metrics, query processing, guardrails).
 
-Tags: langchain, rag, documentation, retrieval, developer-experience, vector-database, chromadb
+Tags: langchain, rag, retrieval-evaluation, citations, chromadb, faiss, sentence-transformers, developer-docs, reproducibility, safety, content-moderation
+
+Target audience
+
+- Developers and engineers who need quick, authoritative answers from official documentation.
+- Tooling and platform teams evaluating RAG pipelines for internal documentation search.
+- Researchers building retrieval evaluation or citation-aware assistants.
+
+How to cite
+
+If you use this work in a publication or demo, please cite the repository; see `CITATION.cff` for machine-readable citation metadata.
 
 ## Problem statement
 
 Developers need fast, authoritative answers drawn from official documentation. Generic LLM answers risk hallucination and lack traceability. This project shows how to combine embeddings, a vector store, and retrieval pipelines to produce grounded responses with provenance.
+
+## Preliminary research
+
+Before building Module 1 we reviewed prior work, common tools, and data sources to ensure the project targets developer documentation retrieval with strong provenance.
+
+- Goal: build a Retrieval-Augmented Generation (RAG) assistant that returns citation-aware answers sourced from authoritative developer docs and minimizes hallucination.
+- Reviewed tools and references: LangChain docs, OpenAI model docs, FAISS and Chroma vector stores, sentence-transformers (SBERT) for dense embeddings, and common ingestion tooling (BeautifulSoup, requests).
+- Data sources: curated documentation snapshots under `data/datasets/` (official docs, tutorials, and API references). Keep the corpus focused and labeled for domain clarity.
+- Evaluation: use offline metrics (precision@k, recall@k, MRR), small labeled eval set under `data/eval`, and lightweight user-acceptance tests for citation quality.
+- Best practice notes: keep a single, clear project title; separate human-facing project name from package/module names; document assumptions, limitations, and safety/guardrails; include tests for retrieval and end-to-end response formatting.
 
 ## Simplified Installation (Module 1)
 
@@ -21,7 +44,7 @@ This section focuses on the minimal steps to run the Module 1 demo. See the code
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd Langchain-Documentation-AIChatBot
+cd Developer-Documentation-Ai-Assistant
 ```
 
 2. Create a virtual environment:
@@ -212,13 +235,26 @@ For Module 1 provide basic evaluation and a path to extend:
 - Online metrics: user satisfaction, response time, and rate of hallucination reports.
 - Keep a small labeled testset under `data/eval` and evaluate retrieval changes before deployment.
 
-## Query Processing & TODOs
+## Query processing
 
-Query processing is currently a lightweight pipeline: cleaning, optional query expansion, embed, and nearest-neighbor search. Recommended improvements:
+Problem
 
-- Implement normalized query preprocessing (lowercase, remove stop-words, synonyms mapping).
-- Add a ranking stage that re-scores retrieved passages using the LLM for relevance before prompting.
-- Track and expose the query processing stage in the API for observability.
+Developer queries are often short, ambiguous, or use domain-specific terms. Without normalization and robust ranking, retrieval can return noisy passages and reduce citation quality.
+
+Approach
+
+The Module 1 pipeline takes a pragmatic, incremental approach: clean and normalize the input, optionally expand the query (for synonyms or API aliases), compute embeddings, and run a nearest-neighbor search against a vector store. For higher precision we plan a two-stage ranker: a fast ANN retrieval followed by an LLM-based re-ranker that scores passages for relevance and provenance.
+
+Results (Module 1)
+
+The current implementation provides a working baseline that returns candidate passages with citation metadata. It is suitable for demos and initial evaluation using offline metrics (precision@k, recall@k, MRR) on the small labeled dev set under `data/eval`.
+
+Limitations & next steps
+
+- Improve normalization: lowercase, punctuation stripping, stop-word handling, and domain synonym mapping.
+- Add an LLM re-ranker to boost precision and reduce hallucination risk.
+- Expose query-processing traces in the API for observability and debugging.
+- Add unit tests and an end-to-end retrieval evaluation harness that computes precision@k and MRR automatically.
 
 ## Module 1 cleanup notes
 
