@@ -52,7 +52,7 @@ def create_streamlit_app():
     """, unsafe_allow_html=True)
     
     # Header
-    st.markdown('<h1 class="main-header">🤖 LangChain Documentation AI Chatbot</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">Developer Documentation Ai-Assistant</h1>', unsafe_allow_html=True)
     
     # Sidebar
     with st.sidebar:

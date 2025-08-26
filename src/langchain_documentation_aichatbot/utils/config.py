@@ -6,7 +6,17 @@ from typing import Optional
 
 from dotenv import load_dotenv
 from pydantic_settings import BaseSettings
-from pydantic import Field
+from pydantic import Field, field_validator
+import json
+
+# Load .env early so environment variables are available before pydantic reads them
+load_dotenv()
+
+# Normalize DOCUMENTATION_SOURCES env var if provided as a comma-separated string
+raw_docs = os.getenv("DOCUMENTATION_SOURCES")
+if raw_docs and not raw_docs.strip().startswith("["):
+    parts = [s.strip() for s in raw_docs.split(',') if s.strip()]
+    os.environ["DOCUMENTATION_SOURCES"] = json.dumps(parts)
 
 
 class Config(BaseSettings):
@@ -88,16 +98,25 @@ class Config(BaseSettings):
             "https://www.uvicorn.org/",
         ]
     )
+
+    @field_validator('documentation_sources', mode='before')
+    def _parse_documentation_sources(cls, v):
+        """Allow DOCUMENTATION_SOURCES env var as comma-separated string or JSON list."""
+        if isinstance(v, str):
+            # try simple comma-split first
+            parts = [s.strip() for s in v.split(',') if s.strip()]
+            return parts
+        return v
     
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
     
     def __init__(self, **kwargs):
-        # Load environment variables
-        load_dotenv()
+        # Environment variables are loaded at module import time to allow
+        # pydantic to read complex fields from env sources.
         super().__init__(**kwargs)
-        
+
         # Ensure vector store directory exists
         Path(self.vector_store_path).mkdir(parents=True, exist_ok=True)
     
