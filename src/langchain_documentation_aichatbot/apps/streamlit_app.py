@@ -1,4 +1,4 @@
-"""Streamlit web application for the LangChain AI Chatbot."""
+"""Streamlit web application for the Developer Documentation AI Assistant."""
 
 import streamlit as st
 from typing import Dict, List
@@ -12,7 +12,7 @@ def create_streamlit_app():
     
     # Page configuration
     st.set_page_config(
-        page_title="LangChain Documentation AI Chatbot",
+        page_title="Developer Documentation AI Assistant",
         page_icon="🤖",
         layout="wide",
         initial_sidebar_state="expanded"
@@ -52,7 +52,7 @@ def create_streamlit_app():
     """, unsafe_allow_html=True)
     
     # Header
-    st.markdown('<h1 class="main-header">Developer Documentation Ai-Assistant</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">Developer Documentation AI Assistant</h1>', unsafe_allow_html=True)
     
     # Sidebar
     with st.sidebar:
@@ -167,7 +167,7 @@ def create_streamlit_app():
                         st.divider()
     
     # Chat input
-    if prompt := st.chat_input("Ask me anything about LangChain, OpenAI, or Python..."):
+    if prompt := st.chat_input("Ask me anything about developer documentation..."):
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
         
@@ -211,7 +211,7 @@ def create_streamlit_app():
     st.markdown(
         """
         <div style='text-align: center; color: #666;'>
-        <p>Powered by LangChain, OpenAI, and legitimate documentation sources</p>
+        <p>Powered by Developer Documentation AI Assistant</p>
         <p>Built with ❤️ for accurate and helpful AI assistance</p>
         </div>
         """,

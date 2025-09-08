@@ -31,6 +31,14 @@ class Config(BaseSettings):
         "https://api.smith.langchain.com", env="LANGCHAIN_ENDPOINT"
     )
     langchain_project: Optional[str] = Field(None, env="LANGCHAIN_PROJECT")
+    langchain_tracing_v2: bool = Field(False, env="LANGCHAIN_TRACING_V2")
+    
+    @field_validator('langchain_tracing_v2', mode='before')
+    def _parse_langchain_tracing_v2(cls, v):
+        """Parse LANGCHAIN_TRACING_V2 as boolean."""
+        if isinstance(v, str):
+            return v.lower() in ('true', '1', 'yes', 'on')
+        return bool(v)
     
     # Model Configuration
     model_provider: str = Field("openai", env="MODEL_PROVIDER")  # "openai", "grok", "anthropic"
